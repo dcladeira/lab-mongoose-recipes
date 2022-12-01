@@ -20,10 +20,20 @@ mongoose
   })
   .then(() => {
     // Run your code here, after you have insured that the connection was made
+    
     // Iteration 2
-    Recipe.create(data[0])
-    .then( (response) => console.log(response.title) )
-    .catch( (error) =>console.log(error));
+    // Recipe.create(data[0])
+    // .then( (response) => console.log(response.title) )
+    // .catch( (error) =>console.log(error));
+    
+    // Iteration 3
+    Recipe.insertMany(data)
+    .then( (docs) => {
+      docs.forEach((doc)=>console.log(doc.title))
+    })
+    .catch( error => {
+      console.error(error)
+    }) 
   })
   .catch(error => {
     console.error('Error connecting to the database', error);
