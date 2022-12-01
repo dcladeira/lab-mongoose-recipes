@@ -1,11 +1,14 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 // Import of the model Recipe from './models/Recipe.model.js'
-const Recipe = require('./models/Recipe.model');
+// const Recipe = require('./models/Recipe.model');
+import Recipe from './models/Recipe.model.js';
 // Import of the data from './data.json'
-const data = require('./data');
+// const data = require('./data');
+import data from './data.json' assert {type: 'json'};
 
-const MONGODB_URI = 'mongodb://localhost:27017/recipe-app';
+const MONGODB_URI = 'mongodb://127.0.0.1:27017/recipe-app';
 
 // Connection to the database "recipe-app"
 mongoose
@@ -17,6 +20,10 @@ mongoose
   })
   .then(() => {
     // Run your code here, after you have insured that the connection was made
+    // Iteration 2
+    Recipe.create(data[0])
+    .then( (response) => console.log(response.title) )
+    .catch( (error) =>console.log(error));
   })
   .catch(error => {
     console.error('Error connecting to the database', error);
