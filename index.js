@@ -11,7 +11,7 @@ import data from './data.json' assert {type: 'json'};
 const MONGODB_URI = 'mongodb://127.0.0.1:27017/recipe-app';
 
 // Connection to the database "recipe-app"
-mongoose
+await mongoose
   .connect(MONGODB_URI)
   .then(x => {
     console.log(`Connected to the database: "${x.connection.name}"`);
@@ -47,10 +47,12 @@ mongoose
     await Recipe.deleteOne({ title: "Carrot Cake"})
     .then(console.log("Successfully deleted."))
     .catch(error=>console.log(error));
-
-    // Iteration 6
-
   })
   .catch(error => {
     console.error('Error connecting to the database', error);
   });
+
+  // Iteration 6
+  mongoose.connection.close()
+  .then(console.log("Connection closed."))
+  .catch(error=>console.log(error));
