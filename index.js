@@ -18,7 +18,7 @@ mongoose
     // Before adding any recipes to the database, let's remove all existing ones
     return Recipe.deleteMany()
   })
-  .then(() => {
+  .then(async () => {
     // Run your code here, after you have insured that the connection was made
     
     // Iteration 2
@@ -27,13 +27,26 @@ mongoose
     // .catch( (error) =>console.log(error));
     
     // Iteration 3
-    Recipe.insertMany(data)
+    await Recipe.insertMany(data)
     .then( (docs) => {
       docs.forEach((doc)=>console.log(doc.title))
     })
     .catch( error => {
       console.error(error)
-    }) 
+    });
+
+    // Iteration 4
+    const query = { title: "Rigatoni alla Genovese" };
+    await Recipe.findOneAndUpdate(
+      query,
+       { duration: 100 })
+    .then(console.log("Successfully updated"))
+    .catch(error=>console.log(error));
+
+    // Iteration 5
+
+    // Iteration 6
+
   })
   .catch(error => {
     console.error('Error connecting to the database', error);
