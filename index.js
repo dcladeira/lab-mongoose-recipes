@@ -40,10 +40,13 @@ mongoose
     await Recipe.findOneAndUpdate(
       query,
        { duration: 100 })
-    .then(console.log("Successfully updated"))
+    .then(console.log("Successfully updated!"))
     .catch(error=>console.log(error));
 
     // Iteration 5
+    await Recipe.deleteOne({ title: "Carrot Cake"})
+    .then(console.log("Successfully deleted."))
+    .catch(error=>console.log(error));
 
     // Iteration 6
 
